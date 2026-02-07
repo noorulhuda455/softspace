@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>SoftSpace</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -14,51 +15,55 @@
     }
 
     .container {
-      max-width: 700px;
+      max-width: 640px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 3rem 1.5rem;
     }
 
     h1 {
-      font-size: 36px;
-      margin-bottom: 10px;
+      font-size: 2.25rem;
+      margin-bottom: 0.5rem;
     }
 
     h2 {
-      font-size: 20px;
-      margin-top: 0;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
     }
 
     p {
-      line-height: 1.6;
       color: #52525b;
+      line-height: 1.6;
     }
 
-    .box {
+    section {
       border: 1px solid #e4e4e7;
       border-radius: 16px;
-      padding: 20px;
-      margin-top: 20px;
+      padding: 1.25rem;
+      margin-top: 1.5rem;
     }
 
     ul {
-      padding-left: 20px;
+      padding-left: 1.25rem;
       color: #52525b;
     }
 
     footer {
-      margin-top: 40px;
-      font-size: 12px;
+      margin-top: 2.5rem;
+      font-size: 0.75rem;
       color: #71717a;
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1>SoftSpace</h1>
-    <p>A gentle space for hard days. Take a breath. You’re allowed to pause.</p>
 
-    <div class="box">
+<body>
+  <main class="container">
+
+    <header>
+      <h1>SoftSpace</h1>
+      <p>A gentle space for hard days. Take a breath. You are allowed to pause.</p>
+    </header>
+
+    <section>
       <h2>Grounding</h2>
       <ul>
         <li>Inhale for 4</li>
@@ -66,35 +71,36 @@
         <li>Exhale for 6</li>
         <li>Repeat 5 times</li>
       </ul>
-    </div>
+    </section>
 
-    <div class="box">
+    <section>
+      <h2>Articles</h2>
+      <p>
+        Short reflections on burnout, stress, overthinking, and emotional
+        exhaustion, written in clear, non-clinical language.
+      </p>
+    </section>
+
+    <section>
       <h2>A gentle reminder</h2>
       <p>
-        Feeling overwhelmed doesn’t mean you’re failing.
-        Stress and burnout are common responses to pressure,
-        not personal flaws.
+        Feeling overwhelmed does not mean you are failing. Stress is a response
+        to pressure, not a personal flaw.
       </p>
-    </div>
+    </section>
 
-    <div class="box">
-      <h2>Today’s softness</h2>
-      <p>You don’t have to do everything today.</p>
-      <p>One small step is enough.</p>
-    </div>
-
-    <div class="box">
-      <h2>Need more support?</h2>
-      <p>If you’re in immediate danger or thinking about harming yourself:</p>
+    <section>
+      <h2>Support resources</h2>
       <ul>
-        <li><strong>Call or text 988</strong> — U.S. Suicide & Crisis Lifeline</li>
-        <li><strong>Call 911</strong> if you are in immediate danger</li>
+        <li><strong>988</strong> — U.S. Crisis Lifeline</li>
+        <li><strong>911</strong> if you are in immediate danger</li>
       </ul>
-    </div>
+    </section>
 
     <footer>
-      SoftSpace is not a substitute for professional mental health care.
+      SoftSpace is not a substitute for professional mental-health care.
     </footer>
-  </div>
+
+  </main>
 </body>
 </html>
