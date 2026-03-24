@@ -14,7 +14,7 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 750px;
       margin: 0 auto;
       padding: 2rem 1.5rem 4rem;
     }
@@ -33,6 +33,28 @@
     .hero {
       text-align: center;
       margin-bottom: 2rem;
+    }
+
+    /* BREATHING */
+    .breathing {
+      width: 60px;
+      height: 60px;
+      margin: 1rem auto 0.5rem;
+      border-radius: 50%;
+      background: #e6e6fa;
+      opacity: 0.7;
+      animation: breathe 6s ease-in-out infinite;
+    }
+
+    .breathing-text {
+      font-size: 0.85rem;
+      color: #71717a;
+    }
+
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.4); }
+      100% { transform: scale(1); }
     }
 
     .card {
@@ -60,14 +82,45 @@
       border: none;
       background: #e6e6fa;
       cursor: pointer;
+      margin-right: 0.5rem;
+    }
+
+    .danger {
+      background: #fcd5d5;
     }
 
     .entry {
       margin-top: 1rem;
-      padding: 0.75rem;
+      padding: 1rem;
       background: white;
-      border-radius: 12px;
-      font-size: 0.9rem;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .entry-time {
+      font-size: 0.7rem;
+      color: #9ca3af;
+      margin-bottom: 0.4rem;
+    }
+
+    .entry-text {
+      font-size: 0.95rem;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 0.7rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .delete-btn:hover {
+      color: #000;
     }
   </style>
 </head>
@@ -83,14 +136,21 @@
     <section class="hero">
       <h1>💬 Take a moment</h1>
       <p>You don’t have to figure everything out. Just write.</p>
+
+      <div class="breathing"></div>
+      <div class="breathing-text" id="breathingText">breathe in...</div>
     </section>
 
+    <!-- INPUT -->
     <div class="card">
       <h3>Journal</h3>
       <textarea id="journalInput" placeholder="What do I need right now?"></textarea>
+      <br/>
       <button onclick="saveEntry()">Save</button>
+      <button class="danger" onclick="clearEntries()">Clear All</button>
     </div>
 
+    <!-- ENTRIES -->
     <div class="card">
       <h3>Your reflections</h3>
       <div id="entries"></div>
@@ -105,11 +165,28 @@
 
       if (!text) return;
 
+      const newEntry = {
+        text: text,
+        time: new Date().toLocaleString()
+      };
+
       let entries = JSON.parse(localStorage.getItem("softspaceEntries")) || [];
-      entries.unshift(text);
+      entries.unshift(newEntry);
       localStorage.setItem("softspaceEntries", JSON.stringify(entries));
 
       input.value = "";
+      displayEntries();
+    }
+
+    function deleteEntry(index) {
+      let entries = JSON.parse(localStorage.getItem("softspaceEntries")) || [];
+      entries.splice(index, 1);
+      localStorage.setItem("softspaceEntries", JSON.stringify(entries));
+      displayEntries();
+    }
+
+    function clearEntries() {
+      localStorage.removeItem("softspaceEntries");
       displayEntries();
     }
 
@@ -119,13 +196,38 @@
 
       container.innerHTML = "";
 
-      entries.forEach(entry => {
+      entries.forEach((entry, index) => {
+        if (!entry.text) return;
+
         const div = document.createElement("div");
         div.className = "entry";
-        div.textContent = entry;
+
+        div.innerHTML = `
+          <button class="delete-btn" onclick="deleteEntry(${index})">✕</button>
+          <div class="entry-time">${entry.time}</div>
+          <div class="entry-text">${entry.text}</div>
+        `;
+
         container.appendChild(div);
       });
     }
+
+    /* BREATHING TEXT SYNC */
+    const textEl = document.getElementById("breathingText");
+
+    function breathingLoop() {
+      textEl.textContent = "breathe in...";
+      setTimeout(() => {
+        textEl.textContent = "hold...";
+      }, 2000);
+
+      setTimeout(() => {
+        textEl.textContent = "breathe out...";
+      }, 3000);
+    }
+
+    setInterval(breathingLoop, 6000);
+    breathingLoop();
 
     displayEntries();
   </script>

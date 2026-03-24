@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: system-ui, -apple-system, sans-serif;
-      background: linear-gradient(135deg, #f7f5f2, #eef2f7);
+      background: linear-gradient(135deg, #fdfaf6, #f3f0ff, #eef7f3);
       color: #3f3f46;
       margin: 0;
     }
@@ -28,61 +28,45 @@
     }
 
     nav h1 {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 600;
+      color: #4c3f91;
     }
 
     nav a {
       text-decoration: none;
       margin-left: 1.2rem;
-      color: #52525b;
+      color: #6b7280;
       font-size: 0.9rem;
       transition: 0.2s;
     }
 
     nav a:hover {
-      color: #000;
+      color: #4c3f91;
     }
 
     /* HERO */
     .hero {
       text-align: center;
       margin-bottom: 3.5rem;
-      animation: fadeIn 1.2s ease;
     }
 
     .hero h2 {
-      font-size: 2.4rem;
+      font-size: 2.5rem;
       margin-bottom: 0.6rem;
       font-weight: 600;
     }
 
     .hero p {
-      color: #71717a;
+      color: #6b7280;
       font-size: 1rem;
-    }
-
-    /* SUBTLE GLOW DOT */
-    .glow {
-      width: 60px;
-      height: 60px;
-      margin: 1.2rem auto 0;
-      border-radius: 50%;
-      background: #e6e6fa;
-      opacity: 0.6;
-      animation: breathe 6s ease-in-out infinite;
-    }
-
-    @keyframes breathe {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.25); }
-      100% { transform: scale(1); }
     }
 
     /* GRID */
     .grid {
       display: grid;
       gap: 1.75rem;
+      margin-bottom: 2.5rem;
     }
 
     @media (min-width: 768px) {
@@ -91,24 +75,40 @@
       }
     }
 
-    /* CARDS */
+    /* CARD LINKS */
     .card-link {
       text-decoration: none;
       color: inherit;
     }
 
+    /* CARDS (COZY COLORS) */
     .card {
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      padding: 1.5rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border-radius: 22px;
+      padding: 1.6rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
       transition: 0.25s;
+      color: #3f3f46;
     }
 
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+    }
+
+    /* INDIVIDUAL CARD COLORS */
+    .card.meditation {
+      background: linear-gradient(135deg, #e6e6fa, #f3f0ff);
+    }
+
+    .card.music {
+      background: linear-gradient(135deg, #e0f7f1, #f0fffa);
+    }
+
+    .card.comfort {
+      background: linear-gradient(135deg, #fff1e6, #fff8f2);
+    }
+
+    .card.reflect {
+      background: linear-gradient(135deg, #fce7f3, #fff0f6);
     }
 
     .card h3 {
@@ -116,31 +116,49 @@
       font-size: 1.2rem;
     }
 
-    /* FOOTER */
-    footer {
-      margin-top: 3rem;
+    /* 🌿 BREATHING */
+    .breathing-section {
       text-align: center;
-      font-size: 0.75rem;
-      color: #71717a;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
     }
 
-    /* FADE IN */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .breathing-circle {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 0.6rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, #e6e6fa, #dcd6f7);
+      opacity: 0.8;
+      animation: breathe 6s ease-in-out infinite;
     }
+
+    .breathing-text {
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.35); }
+      100% { transform: scale(1); }
+    }
+
+    /* FOOTER */
+    footer {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
   </style>
 </head>
 
 <body>
   <main class="container">
 
+    <!-- NAV -->
     <nav>
       <h1>SoftSpace</h1>
       <div>
@@ -151,39 +169,38 @@
       </div>
     </nav>
 
+    <!-- HERO -->
     <section class="hero">
       <h2>A space to pause, breathe, and just be</h2>
       <p>You are allowed to slow down.</p>
-
-      <!-- subtle calming element -->
-      <div class="glow"></div>
     </section>
 
+    <!-- GRID -->
     <div class="grid">
 
       <a href="meditation.html" class="card-link">
-        <div class="card">
+        <div class="card meditation">
           <h3>🧘 Meditation</h3>
           <p>Guided videos for calm and focus.</p>
         </div>
       </a>
 
       <a href="music.html" class="card-link">
-        <div class="card">
+        <div class="card music">
           <h3>🎧 Music</h3>
           <p>Soft sounds and lo-fi playlists.</p>
         </div>
       </a>
 
       <a href="comfort.html" class="card-link">
-        <div class="card">
+        <div class="card comfort">
           <h3>🍪 Comfort</h3>
           <p>Warm recipes and cozy ideas.</p>
         </div>
       </a>
 
       <a href="reflect.html" class="card-link">
-        <div class="card">
+        <div class="card reflect">
           <h3>💬 Reflect</h3>
           <p>Write, pause, and check in.</p>
         </div>
@@ -191,6 +208,13 @@
 
     </div>
 
+    <!-- BREATHING -->
+    <div class="breathing-section">
+      <div class="breathing-circle"></div>
+      <div class="breathing-text">breathe in... breathe out...</div>
+    </div>
+
+    <!-- FOOTER -->
     <footer>
       SoftSpace is not a substitute for professional mental-health care.
     </footer>
