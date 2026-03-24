@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Music | SoftSpace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f7f5f2, #eef2f7);
+      color: #3f3f46;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #52525b;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    iframe {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 1rem;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      background: #e6e6fa;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <nav>
+      <a href="index.html">← Back</a>
+      <span>Music</span>
+    </nav>
+
+    <section class="hero">
+      <h1>🎧 Soft sounds</h1>
+      <p>Let something gentle play in the background.</p>
+    </section>
+
+    <!-- LOFI -->
+    <div class="card">
+      <h3>Lo-fi Focus</h3>
+      <iframe height="220"
+        src="https://www.youtube.com/embed/5qap5aO4i9A"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- RAIN -->
+    <div class="card">
+      <h3>Rain Sounds</h3>
+      <iframe height="220"
+        src="https://www.youtube.com/embed/mPZkdNFkNps"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- OCEAN -->
+    <div class="card">
+      <h3>Ocean Waves</h3>
+      <iframe height="220"
+        src="https://www.youtube.com/embed/V1bFr2SWP1I"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+  </main>
+</body>
+</html>

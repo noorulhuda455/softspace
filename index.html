@@ -7,50 +7,133 @@
 
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #ffffff;
-      color: #18181b;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f7f5f2, #eef2f7);
+      color: #3f3f46;
       margin: 0;
-      padding: 0;
     }
 
     .container {
-      max-width: 640px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 3rem 1.5rem;
+      padding: 2rem 1.5rem 4rem;
     }
 
-    h1 {
-      font-size: 2.25rem;
-      margin-bottom: 0.5rem;
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
     }
 
-    h2 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
+    nav h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
     }
 
-    p {
+    nav a {
+      text-decoration: none;
+      margin-left: 1.2rem;
       color: #52525b;
-      line-height: 1.6;
+      font-size: 0.9rem;
+      transition: 0.2s;
     }
 
-    section {
-      border: 1px solid #e4e4e7;
-      border-radius: 16px;
-      padding: 1.25rem;
-      margin-top: 1.5rem;
+    nav a:hover {
+      color: #000;
     }
 
-    ul {
-      padding-left: 1.25rem;
-      color: #52525b;
+    /* HERO */
+    .hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      animation: fadeIn 1.2s ease;
     }
 
+    .hero h2 {
+      font-size: 2.4rem;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+    }
+
+    .hero p {
+      color: #71717a;
+      font-size: 1rem;
+    }
+
+    /* SUBTLE GLOW DOT */
+    .glow {
+      width: 60px;
+      height: 60px;
+      margin: 1.2rem auto 0;
+      border-radius: 50%;
+      background: #e6e6fa;
+      opacity: 0.6;
+      animation: breathe 6s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      gap: 1.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* CARDS */
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    /* FOOTER */
     footer {
-      margin-top: 2.5rem;
+      margin-top: 3rem;
+      text-align: center;
       font-size: 0.75rem;
       color: #71717a;
+    }
+
+    /* FADE IN */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -58,44 +141,55 @@
 <body>
   <main class="container">
 
-    <header>
+    <nav>
       <h1>SoftSpace</h1>
-      <p>A gentle space for hard days. Take a breath. You are allowed to pause.</p>
-    </header>
+      <div>
+        <a href="meditation.html">Meditation</a>
+        <a href="music.html">Music</a>
+        <a href="comfort.html">Comfort</a>
+        <a href="reflect.html">Reflect</a>
+      </div>
+    </nav>
 
-    <section>
-      <h2>Grounding</h2>
-      <ul>
-        <li>Inhale for 4</li>
-        <li>Hold for 2</li>
-        <li>Exhale for 6</li>
-        <li>Repeat 5 times</li>
-      </ul>
+    <section class="hero">
+      <h2>A space to pause, breathe, and just be</h2>
+      <p>You are allowed to slow down.</p>
+
+      <!-- subtle calming element -->
+      <div class="glow"></div>
     </section>
 
-    <section>
-      <h2>Articles</h2>
-      <p>
-        Short reflections on burnout, stress, overthinking, and emotional
-        exhaustion, written in clear, non-clinical language.
-      </p>
-    </section>
+    <div class="grid">
 
-    <section>
-      <h2>A gentle reminder</h2>
-      <p>
-        Feeling overwhelmed does not mean you are failing. Stress is a response
-        to pressure, not a personal flaw.
-      </p>
-    </section>
+      <a href="meditation.html" class="card-link">
+        <div class="card">
+          <h3>🧘 Meditation</h3>
+          <p>Guided videos for calm and focus.</p>
+        </div>
+      </a>
 
-    <section>
-      <h2>Support resources</h2>
-      <ul>
-        <li><strong>988</strong> — U.S. Crisis Lifeline</li>
-        <li><strong>911</strong> if you are in immediate danger</li>
-      </ul>
-    </section>
+      <a href="music.html" class="card-link">
+        <div class="card">
+          <h3>🎧 Music</h3>
+          <p>Soft sounds and lo-fi playlists.</p>
+        </div>
+      </a>
+
+      <a href="comfort.html" class="card-link">
+        <div class="card">
+          <h3>🍪 Comfort</h3>
+          <p>Warm recipes and cozy ideas.</p>
+        </div>
+      </a>
+
+      <a href="reflect.html" class="card-link">
+        <div class="card">
+          <h3>💬 Reflect</h3>
+          <p>Write, pause, and check in.</p>
+        </div>
+      </a>
+
+    </div>
 
     <footer>
       SoftSpace is not a substitute for professional mental-health care.

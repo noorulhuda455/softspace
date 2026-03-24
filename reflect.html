@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reflect | SoftSpace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f7f5f2, #eef2f7);
+      color: #3f3f46;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #52525b;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      font-family: inherit;
+      resize: none;
+    }
+
+    button {
+      margin-top: 0.75rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      background: #e6e6fa;
+      cursor: pointer;
+    }
+
+    .entry {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: white;
+      border-radius: 12px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <nav>
+      <a href="index.html">← Back</a>
+      <span>Reflect</span>
+    </nav>
+
+    <section class="hero">
+      <h1>💬 Take a moment</h1>
+      <p>You don’t have to figure everything out. Just write.</p>
+    </section>
+
+    <div class="card">
+      <h3>Journal</h3>
+      <textarea id="journalInput" placeholder="What do I need right now?"></textarea>
+      <button onclick="saveEntry()">Save</button>
+    </div>
+
+    <div class="card">
+      <h3>Your reflections</h3>
+      <div id="entries"></div>
+    </div>
+
+  </main>
+
+  <script>
+    function saveEntry() {
+      const input = document.getElementById("journalInput");
+      const text = input.value.trim();
+
+      if (!text) return;
+
+      let entries = JSON.parse(localStorage.getItem("softspaceEntries")) || [];
+      entries.unshift(text);
+      localStorage.setItem("softspaceEntries", JSON.stringify(entries));
+
+      input.value = "";
+      displayEntries();
+    }
+
+    function displayEntries() {
+      const container = document.getElementById("entries");
+      const entries = JSON.parse(localStorage.getItem("softspaceEntries")) || [];
+
+      container.innerHTML = "";
+
+      entries.forEach(entry => {
+        const div = document.createElement("div");
+        div.className = "entry";
+        div.textContent = entry;
+        container.appendChild(div);
+      });
+    }
+
+    displayEntries();
+  </script>
+
+</body>
+</html>

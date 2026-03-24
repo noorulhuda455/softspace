@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Comfort | SoftSpace</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f7f5f2, #eef2f7);
+      color: #3f3f46;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #52525b;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .card {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1rem;
+    }
+
+    h3 {
+      margin: 0 0 0.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: #71717a;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <nav>
+      <a href="index.html">← Back</a>
+      <span>Comfort</span>
+    </nav>
+
+    <section class="hero">
+      <h1>🍪 Comfort corner</h1>
+      <p>Small, warm things that make the day feel softer.</p>
+    </section>
+
+    <div class="grid">
+
+      <!-- COOKIES -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092" />
+        <div class="card-content">
+          <h3>Chocolate Chip Cookies</h3>
+          <p>Soft, warm, and comforting.</p>
+          <ul>
+            <li>Flour, sugar, butter</li>
+            <li>Chocolate chips</li>
+            <li>Bake at 350°F for 10–12 min</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- BROWNIES -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c" />
+        <div class="card-content">
+          <h3>Fudgy Brownies</h3>
+          <p>Rich and cozy.</p>
+          <ul>
+            <li>Cocoa powder, butter, sugar</li>
+            <li>Eggs + flour</li>
+            <li>Bake at 350°F for 20 min</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TEA -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93" />
+        <div class="card-content">
+          <h3>Warm Tea</h3>
+          <p>Simple and calming.</p>
+          <ul>
+            <li>Boil water</li>
+            <li>Add tea bag</li>
+            <li>Optional honey</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PANCAKES -->
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1587735243615-c03f25aaff15" />
+        <div class="card-content">
+          <h3>Pancakes</h3>
+          <p>Soft mornings made better.</p>
+          <ul>
+            <li>Flour, milk, eggs</li>
+            <li>Cook on pan</li>
+            <li>Add syrup or fruit</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+</body>
+</html>
