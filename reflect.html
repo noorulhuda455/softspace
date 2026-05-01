@@ -122,6 +122,13 @@
     .delete-btn:hover {
       color: #000;
     }
+
+    /* NEW: Prompt text styling */
+    #promptText {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-top: 0.5rem;
+    }
   </style>
 </head>
 
@@ -144,6 +151,11 @@
     <!-- INPUT -->
     <div class="card">
       <h3>Journal</h3>
+
+      <!-- NEW: Prompt Button -->
+      <button onclick="generatePrompt()">Give me a prompt</button>
+      <p id="promptText"></p>
+
       <textarea id="journalInput" placeholder="What do I need right now?"></textarea>
       <br/>
       <button onclick="saveEntry()">Save</button>
@@ -210,6 +222,20 @@
 
         container.appendChild(div);
       });
+    }
+
+    /* NEW: Prompt Generator */
+    function generatePrompt() {
+      const prompts = [
+        "What do I need right now?",
+        "What has been on my mind lately?",
+        "What would I tell a friend feeling like this?",
+        "What is one small thing I can do for myself today?",
+        "What am I holding onto that I can let go of?"
+      ];
+
+      const random = prompts[Math.floor(Math.random() * prompts.length)];
+      document.getElementById("promptText").innerText = random;
     }
 
     /* BREATHING TEXT SYNC */

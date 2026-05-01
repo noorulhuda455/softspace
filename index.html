@@ -174,6 +174,26 @@
       color: #9ca3af;
     }
 
+    .mood-section {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .mood-buttons button {
+      margin: 0.3rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: none;
+      background: #e6e6fa;
+      cursor: pointer;
+    }
+
+    .mood-result {
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+      color: #4c3f91;
+    }
+
   </style>
 </head>
 
@@ -196,6 +216,20 @@
       <h2>A space to pause, breathe, and just be</h2>
       <p>You are allowed to slow down.</p>
     </section>
+
+    <!-- MOOD CHECK -->
+    <div class="mood-section">
+      <h3>How are you feeling?</h3>
+
+      <div class="mood-buttons">
+        <button onclick="setMood('stressed')">😔 Stressed</button>
+        <button onclick="setMood('okay')">😐 Okay</button>
+        <button onclick="setMood('good')">😊 Good</button>
+        <button onclick="setMood('tired')">😴 Tired</button>
+      </div>
+
+      <div id="moodResult" class="mood-result"></div>
+    </div>
 
     <!-- GRID -->
     <div class="grid">
@@ -252,5 +286,21 @@
     </footer>
 
   </main>
+
+  <script>
+    function setMood(mood) {
+      const result = document.getElementById("moodResult");
+    
+      const responses = {
+        stressed: "Try a 5-minute breathing exercise + rain sounds.",
+        okay: "Maybe reflect for a moment or listen to soft music.",
+        good: "Keep the energy going—maybe share a kind thought.",
+        tired: "Take a pause. Tea + a short meditation could help."
+      };
+    
+      result.innerText = responses[mood];
+    }
+    </script>
+
 </body>
 </html>
