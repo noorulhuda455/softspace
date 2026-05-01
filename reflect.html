@@ -123,11 +123,24 @@
       color: #000;
     }
 
-    /* NEW: Prompt text styling */
     #promptText {
       font-size: 0.85rem;
       color: #6b7280;
       margin-top: 0.5rem;
+    }
+
+    /* ✨ Affirmation animation */
+    .affirmation {
+      font-size: 0.9rem;
+      color: #4c3f91;
+      margin: 0.5rem 0;
+      font-style: italic;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .affirmation.show {
+      opacity: 1;
     }
   </style>
 </head>
@@ -148,11 +161,14 @@
       <div class="breathing-text" id="breathingText">breathe in...</div>
     </section>
 
-    <!-- INPUT -->
+    <!-- JOURNAL -->
     <div class="card">
       <h3>Journal</h3>
 
-      <!-- NEW: Prompt Button -->
+      <p id="affirmationText" class="affirmation"></p>
+
+      <button onclick="newAffirmation()">New reminder</button>
+
       <button onclick="generatePrompt()">Give me a prompt</button>
       <p id="promptText"></p>
 
@@ -174,7 +190,6 @@
     function saveEntry() {
       const input = document.getElementById("journalInput");
       const text = input.value.trim();
-
       if (!text) return;
 
       const newEntry = {
@@ -188,6 +203,9 @@
 
       input.value = "";
       displayEntries();
+
+      // ✨ NEW: update affirmation after saving
+      newAffirmation();
     }
 
     function deleteEntry(index) {
@@ -224,7 +242,6 @@
       });
     }
 
-    /* NEW: Prompt Generator */
     function generatePrompt() {
       const prompts = [
         "What do I need right now?",
@@ -238,18 +255,37 @@
       document.getElementById("promptText").innerText = random;
     }
 
-    /* BREATHING TEXT SYNC */
+    function newAffirmation() {
+      const affirmations = [
+        "You’re doing better than you think.",
+        "It’s okay to take things one step at a time.",
+        "You deserve rest.",
+        "You’ve made it through hard days before.",
+        "Be gentle with yourself today.",
+        "Small progress is still progress."
+      ];
+
+      const el = document.getElementById("affirmationText");
+
+      el.classList.remove("show");
+
+      const random = affirmations[Math.floor(Math.random() * affirmations.length)];
+      el.innerText = random;
+
+      setTimeout(() => {
+        el.classList.add("show");
+      }, 50);
+    }
+
+    // load on page start
+    newAffirmation();
+
     const textEl = document.getElementById("breathingText");
 
     function breathingLoop() {
       textEl.textContent = "breathe in...";
-      setTimeout(() => {
-        textEl.textContent = "hold...";
-      }, 2000);
-
-      setTimeout(() => {
-        textEl.textContent = "breathe out...";
-      }, 3000);
+      setTimeout(() => { textEl.textContent = "hold..."; }, 2000);
+      setTimeout(() => { textEl.textContent = "breathe out..."; }, 3000);
     }
 
     setInterval(breathingLoop, 6000);
