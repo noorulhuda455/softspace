@@ -5,7 +5,6 @@
   <title>Comfort | SoftSpace</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ✅ ADD THIS -->
   <link rel="stylesheet" href="styles.css" />
 
   <style>
@@ -85,10 +84,35 @@
       font-size: 0.85rem;
     }
 
-    /* ✨ NEW: Recipe Section spacing */
+    /* subtle recipe section */
     .recipe-section {
-      margin-top: 3rem;
+      margin-top: 2.5rem;
       text-align: center;
+    }
+
+    /* 🐾 floating pet */
+    #petButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 1.3rem;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      padding: 0.5rem;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: 0.2s;
+    }
+
+    #petButton:hover {
+      transform: scale(1.1);
+    }
+
+    #petPopup {
+      position: fixed;
+      bottom: 65px;
+      right: 20px;
     }
   </style>
 </head>
@@ -162,27 +186,92 @@
 
     </div>
 
-    <!-- ✅ NEW: RECIPE FINDER -->
+    <!-- subtle recipe finder -->
     <section class="recipe-section">
-      <h2>🍳 What can I make?</h2>
-      <p>Use what you have. Keep it simple.</p>
+      <p style="font-size:0.85rem; color:#9ca3af; margin-bottom:0.5rem;">
+        what can I make?
+      </p>
 
-      <div class="recipe-input">
+      <div class="recipe-input" style="justify-content:center;">
         <input 
           type="text" 
           id="ingredientsInput" 
-          placeholder="e.g. eggs, milk, bread"
+          placeholder="eggs, milk..."
+          style="
+            max-width:200px;
+            border-radius:999px;
+            border:1px solid #e5e7eb;
+            padding:0.4rem 0.8rem;
+            font-size:0.8rem;
+          "
         />
-        <button onclick="findRecipes()">Find</button>
+        <button 
+          onclick="findRecipes()"
+          style="
+            border-radius:999px;
+            padding:0.4rem 0.9rem;
+            font-size:0.8rem;
+            background:#e6e6fa;
+            border:none;
+            cursor:pointer;
+          "
+        >
+          find
+        </button>
       </div>
 
-      <div id="results" class="recipes-section"></div>
+      <div id="results" class="recipes-section" style="margin-top:0.8rem;"></div>
     </section>
 
   </main>
 
-  <!-- ✅ ADD THIS -->
+  <!-- 🐾 sneaky pet -->
+  <div id="petButton">🐾</div>
+  <div id="petPopup"></div>
+
   <script src="recipes.js"></script>
+
+  <script>
+    const petImages = [
+      "https://images.unsplash.com/photo-1518717758536-85ae29035b6d",
+      "https://images.unsplash.com/photo-1595433562696-93fdd4d0f7d1",
+      "https://images.unsplash.com/photo-1601758228041-f3b2795255f1",
+      "https://images.unsplash.com/photo-1574158622682-e40e69881006",
+      "https://images.unsplash.com/photo-1583337130417-3346a1be7dee",
+      "https://images.unsplash.com/photo-1598137260911-cd1f8c7b44d7",
+      "https://images.unsplash.com/photo-1543852786-1cf6624b9987"
+    ];
+    
+    document.getElementById("petButton").onclick = () => {
+      const popup = document.getElementById("petPopup");
+    
+      popup.innerHTML = "";
+    
+      const random = petImages[Math.floor(Math.random() * petImages.length)];
+    
+      popup.innerHTML = `
+        <img src="${random}?auto=format&fit=crop&w=400&q=80"
+          style="
+            border-radius:12px;
+            box-shadow:0 10px 20px rgba(0,0,0,0.1);
+            opacity:0;
+            transform:translateY(10px);
+            transition:0.3s;
+          "
+        />
+      `;
+    
+      const img = popup.querySelector("img");
+      setTimeout(() => {
+        img.style.opacity = "1";
+        img.style.transform = "translateY(0)";
+      }, 50);
+    
+      setTimeout(() => {
+        popup.innerHTML = "";
+      }, 5000);
+    };
+    </script>
 
 </body>
 </html>
