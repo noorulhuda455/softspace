@@ -73,6 +73,7 @@
       padding: 0.75rem;
       font-family: inherit;
       resize: none;
+      box-sizing: border-box;
     }
 
     button {
@@ -83,10 +84,20 @@
       background: #e6e6fa;
       cursor: pointer;
       margin-right: 0.5rem;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: #dcd6f7;
     }
 
     .danger {
       background: #fcd5d5;
+    }
+
+    .danger:hover {
+      background: #f8bcbc;
     }
 
     .entry {
@@ -106,6 +117,7 @@
 
     .entry-text {
       font-size: 0.95rem;
+      line-height: 1.5;
     }
 
     .delete-btn {
@@ -117,10 +129,15 @@
       border: none;
       cursor: pointer;
       color: #999;
+      padding: 0;
+      margin: 0;
+      width: auto;
     }
 
     .delete-btn:hover {
       color: #000;
+      transform: none;
+      background: none;
     }
 
     #promptText {
@@ -129,7 +146,7 @@
       margin-top: 0.5rem;
     }
 
-    /* ✨ Affirmation animation */
+    /* AFFIRMATION */
     .affirmation {
       font-size: 0.9rem;
       color: #4c3f91;
@@ -141,6 +158,107 @@
 
     .affirmation.show {
       opacity: 1;
+    }
+
+    /* AI MOOD GUIDE */
+    .ai-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.75), rgba(243,240,255,0.85));
+      border: 1px solid rgba(230, 230, 250, 0.8);
+    }
+
+    .ai-card p {
+      color: #6b7280;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .ai-card textarea {
+      min-height: 100px;
+    }
+
+    .ai-result {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .ai-label {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-bottom: 0.4rem;
+    }
+
+    .ai-mood {
+      display: inline-block;
+      margin-bottom: 0.7rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: #e6e6fa;
+      color: #4c3f91;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .ai-note {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 600px) {
+      .container {
+        padding: 1.25rem 1rem 3rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+      }
+
+      .card {
+        padding: 1.2rem;
+        border-radius: 18px;
+      }
+
+      textarea,
+      input {
+        font-size: 1rem;
+      }
+
+      button {
+        width: 100%;
+        margin-right: 0;
+        margin-top: 0.75rem;
+      }
+
+      .delete-btn {
+        width: auto;
+      }
+
+      .breathing {
+        width: 55px;
+        height: 55px;
+      }
+
+      .ai-result {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -178,6 +296,27 @@
       <button class="danger" onclick="clearEntries()">Clear All</button>
     </div>
 
+    <!-- AI MOOD GUIDE -->
+    <div class="card ai-card">
+      <h3>✨ AI Mood Guide</h3>
+      <p>
+        Write one sentence about how you are feeling, and SoftSpace will suggest a gentle next step.
+      </p>
+
+      <textarea 
+        id="moodInput" 
+        placeholder="Example: I feel overwhelmed and tired."></textarea>
+
+      <br/>
+      <button onclick="analyzeMood()">Guide Me</button>
+
+      <div id="moodResult" class="ai-result" style="display: none;"></div>
+
+      <p class="ai-note">
+        Prototype note: This uses rule-based mood detection to simulate an AI-powered reflection guide.
+      </p>
+    </div>
+
     <!-- ENTRIES -->
     <div class="card">
       <h3>Your reflections</h3>
@@ -204,7 +343,6 @@
       input.value = "";
       displayEntries();
 
-      // ✨ NEW: update affirmation after saving
       newAffirmation();
     }
 
@@ -277,7 +415,90 @@
       }, 50);
     }
 
-    // load on page start
+    function analyzeMood() {
+      const input = document.getElementById("moodInput").value.toLowerCase();
+      const result = document.getElementById("moodResult");
+
+      if (!input.trim()) {
+        result.style.display = "block";
+        result.innerHTML = `
+          <div class="ai-label">AI-inspired mood guide</div>
+          <div class="entry-text">
+            Try writing one sentence about how you feel right now.
+          </div>
+        `;
+        return;
+      }
+
+      let mood = "Neutral";
+      let message = "Thank you for checking in. Take a slow breath and choose one small thing that would support you right now.";
+      let suggestion = "Try writing one more sentence about what you need in this moment.";
+
+      if (
+        input.includes("stress") ||
+        input.includes("stressed") ||
+        input.includes("overwhelmed") ||
+        input.includes("anxious") ||
+        input.includes("anxiety") ||
+        input.includes("panic") ||
+        input.includes("worried")
+      ) {
+        mood = "Stressed";
+        message = "It sounds like your mind may be carrying a lot right now.";
+        suggestion = "Try a short breathing reset on the Meditation page.";
+      } else if (
+        input.includes("sad") ||
+        input.includes("lonely") ||
+        input.includes("down") ||
+        input.includes("cry") ||
+        input.includes("upset") ||
+        input.includes("hurt")
+      ) {
+        mood = "Sad";
+        message = "It sounds like you may need comfort and reassurance.";
+        suggestion = "Try visiting the Comfort Corner for something warm and gentle.";
+      } else if (
+        input.includes("tired") ||
+        input.includes("exhausted") ||
+        input.includes("burnt out") ||
+        input.includes("burned out") ||
+        input.includes("drained")
+      ) {
+        mood = "Tired";
+        message = "It sounds like your body may be asking for rest.";
+        suggestion = "Try soft music or a small comforting activity.";
+      } else if (
+        input.includes("happy") ||
+        input.includes("good") ||
+        input.includes("grateful") ||
+        input.includes("excited") ||
+        input.includes("proud")
+      ) {
+        mood = "Positive";
+        message = "It sounds like you are carrying some good energy today.";
+        suggestion = "Try writing down what made today feel good.";
+      } else if (
+        input.includes("angry") ||
+        input.includes("mad") ||
+        input.includes("frustrated") ||
+        input.includes("annoyed")
+      ) {
+        mood = "Frustrated";
+        message = "It sounds like something may be weighing on you or feeling unfair.";
+        suggestion = "Try writing what happened, then write what you need next.";
+      }
+
+      result.style.display = "block";
+      result.innerHTML = `
+        <div class="ai-label">AI-inspired mood guide</div>
+        <span class="ai-mood">Detected mood: ${mood}</span>
+        <div class="entry-text">
+          ${message}<br><br>
+          <strong>Suggested next step:</strong> ${suggestion}
+        </div>
+      `;
+    }
+
     newAffirmation();
 
     const textEl = document.getElementById("breathingText");
